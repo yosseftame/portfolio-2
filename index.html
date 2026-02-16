@@ -14,6 +14,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
@@ -458,20 +460,32 @@
           </div>
         </div>
 
+
+        
         <div class="contact-main">
-          <form class="contact-form">
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/mgolyaqk" method="post">
             <div class="input-row">
-              <input type="text" placeholder="Your Name" required />
-              <input type="email" placeholder="Your Email" required />
+              <input type="text" placeholder="Your Name" required name="name" />
+              <input type="email" placeholder="Your Email" name="email" required />
             </div>
-            <input type="text" placeholder="Subject" />
-            <textarea placeholder="Your Message" rows="6" required></textarea>
+            <input type="text" placeholder="Subject" name="subject"/>
+            <textarea placeholder="Your Message" rows="6" required name="message"></textarea>
             <button type="submit" class="send-btn">
               Send Message <i class="fas fa-paper-plane"></i>
             </button>
           </form>
         </div>
+
+
+
+
+
+
+
+
       </div>
+
+
     </section>
 
     <footer class="simple-footer">

@@ -3,16 +3,25 @@ const searchBtn = document.querySelector(".search-box button");
 let weatherImg = document.querySelector(".weather-icon img");
 let langauge = document.documentElement.lang;
 
-console.log(weatherImg.src);
-
 const en = document.querySelector(".en");
 const ar = document.querySelector(".ar");
 const divInput = document.querySelector(".search-box");
-const windDetails = document.querySelector(".wind");
 const wind = document.querySelector(".wind-property");
 const humidity = document.querySelector(".humidity-property");
 
+const cityName = document.querySelector(".city");
+const tempValue = document.querySelector("#temp-val");
+const description = document.querySelector(".description");
+const windDetails = document.querySelector(".wind");
+const humidityDetails = document.querySelector(".humidity");
+
+const errorMessage=document.querySelector(".error-message")
+
 en.addEventListener("click", () => {
+  errorMessage.textContent =
+    "Invalid city name, please try again.";
+
+  errorMessage.setAttribute("dir", "ltr");
   divInput.setAttribute("dir", "ltr");
   windDetails.setAttribute("dir", "ltr");
   input.setAttribute("placeholder", "Country Name");
@@ -23,6 +32,9 @@ en.addEventListener("click", () => {
   ar.classList.remove("active");
 });
 ar.addEventListener("click", () => {
+  errorMessage.style.textAlign="start"
+  errorMessage.setAttribute("dir","rtl")
+  errorMessage.textContent="اسم الدوله غير صحيح"
   divInput.setAttribute("dir", "rtl");
   windDetails.setAttribute("dir", "rtl");
   input.setAttribute("placeholder", "ابحث عن اسم المدينه");
@@ -37,70 +49,98 @@ let getData = async function (countryName, lang) {
   const resp = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${countryName}&appid=e96dfdaecc3b0640eb24ea6b891d1e6c&units=metric&lang=${lang}`,
   );
-  
+
   const data = await resp.json();
   return data;
 };
 
-
 searchBtn.addEventListener("click", () => {
   console.log(input.value);
-  if(input.value!==""){
+  if (input.value !== "") {
+    getData(input.value, document.documentElement.lang)
+      .then((r) => {
+        errorMessage.style.display = "none";
 
-    getData(input.value, document.documentElement.lang).then((r) => {
-      document.querySelector(".city").textContent = r.name;
-  
-      document.querySelector("#temp-val").textContent = `${r.main.temp}`;
-      document.querySelector(".description").textContent =
-        r.weather[0].description;
-      document.querySelector(".humidity").textContent = `${r.main.humidity} %`;
-      if (document.documentElement.lang === "en") {
-        document.querySelector(".wind").textContent = `${r.wind.speed} km / h`;
-      } else {
-        document.querySelector(".wind").textContent = `${r.wind.speed} كم/س`;
-      }
-      weatherImg.src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@4x.png`;
-      console.log(r);
-    });
-  }else{
-    document.querySelector(".error-message").style.display="block"
+        cityName.textContent = r.name;
+        tempValue.textContent = `${r.main.temp}`;
+        description.textContent =
+          r.weather[0].description;
+        humidityDetails.textContent =
+          `${r.main.humidity} %`;
+        if (document.documentElement.lang === "en") {
+          windDetails.textContent =
+            `${r.wind.speed} km / h`;
+        } else {
+          windDetails.textContent = `${r.wind.speed} كم/س`;
+        }
+        weatherImg.src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@4x.png`;
+        console.log(r);
+      })
+      .catch(() => {
+        errorMessage.style.display = "block";
+
+        cityName.textContent = "---";
+        tempValue.textContent = "---";
+        description.textContent = "---";
+        windDetails.textContent = "---";
+        humidityDetails.textContent = "---";
+      });
+  } else {
+    errorMessage.style.display = "block";
+
+    cityName.textContent = "---";
+    tempValue.textContent = "---";
+    description.textContent = "---";
+    windDetails.textContent = "---";
+    humidityDetails.textContent = "---";
   }
 
-  document.querySelector(".description");
   input.focus();
 });
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    if(input.value!==""){
+    if (input.value !== "") {
+      getData(input.value, document.documentElement.lang)
+        .then((r) => {
+          errorMessage.style.display = "none";
+          cityName.textContent = r.name;
+          tempValue.textContent = `${r.main.temp}`;
+          description.textContent =
+            r.weather[0].description;
+          humidityDetails.textContent =
+            `${r.main.humidity} %`;
+          if (document.documentElement.lang === "en") {
+            windDetails.textContent =
+              `${r.wind.speed} km / h`;
+          } else {
+            windDetails.textContent =
+              `${r.wind.speed} كم/س`;
+          }
+          weatherImg.src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@4x.png`;
+          input.focus();
+        })
+        .catch(() => {
+          errorMessage.style.display = "block";
 
-      getData(input.value, document.documentElement.lang).then((r) => {
-        document.querySelector(".city").textContent = r.name;
-        document.querySelector("#temp-val").textContent = `${r.main.temp}`;
-        document.querySelector(".description").textContent =
-          r.weather[0].description;
-        document.querySelector(".humidity").textContent = `${r.main.humidity} %`;
-        if (document.documentElement.lang === "en") {
-          document.querySelector(".wind").textContent = `${r.wind.speed} km / h`;
-        } else {
-          document.querySelector(".wind").textContent = `${r.wind.speed} كم/س`;
-        }
-        weatherImg.src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@4x.png`;
-        input.focus();
-      });
-    }else{
-     document.querySelector(".error-message").style.display = "block";
+          cityName.textContent = "---";
+          tempValue.textContent = "---";
+          description.textContent = "---";
+          windDetails.textContent = "---";
+          humidityDetails.textContent = "---";
+        });
+    } else {
+      errorMessage.style.display = "block";
+
+      cityName.textContent = "---";
+      tempValue.textContent = "---";
+      description.textContent = "---";
+      windDetails.textContent = "---";
+      humidityDetails.textContent = "---";
     }
   } else {
-    return null;
+    return;
   }
 });
-
-
-
-
-
-
-
 
 // ! dark mode
 // btn.onclick= ()=>{

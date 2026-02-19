@@ -1,0 +1,288 @@
+/* 1. المتغيرات - Variables لسهولة التعديل */
+:root {
+  /* ألوان الـ Dark Mode الاحترافي */
+  --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  --card-bg: rgba(255, 255, 255, 0.07); /* تأثير زجاجي شفاف جداً */
+  --text-primary: #ffffff;
+  --text-secondary: #b0bec5;
+  --accent-color: #00d2ff; /* لون النيون للأيقونات */
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /*  */
+  --bg-gradient-dark-mode: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --text-primary-dark-mode: #333;
+  --card-bg-dark-mode: rgba(255, 255, 255, 0.8); /*   =  */
+}
+
+
+/* تنسيق حاوية أزرار اللغة */
+.language-switch {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* تنسيق الأزرار نفسها */
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: var(--transition);
+    min-width: 50px;
+}
+
+/* حالة الزر النشط (المختار) */
+.lang-btn.active {
+    background: var(--accent-color);
+    color: #0f2027;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+}
+
+/* تأثير عند تمرير الماوس على الزر غير النشط */
+.lang-btn:not(.active):hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 2. الإعدادات العامة */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-primary);
+  overflow: hidden; /* لمنع السكرول لو مش محتاجينه */
+}
+
+/* dark mode */
+
+.dark-mode {
+  background: var(--bg-gradient-dark-mode);
+  color: var(--text-primary-dark-mode);
+}
+
+/* 3. الحاوية والكارت */
+.container {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  animation: slideUp 0.8s ease-out;
+}
+
+.weather-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  transition: var(--transition);
+}
+.weather-card-dark-mod {
+  background: var(--card-bg-dark-mode);
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+/* صندوق البحث المعدل */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2); /* خلفية أغمق عشان تبرز من الكارت */
+    border-radius: 15px;
+    padding: 5px 12px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* إطار خفيف جداً للتحديد */
+    transition: all 0.3s ease;
+}
+
+/* لما المستخدم يضغط على الـ input للـ كتابة */
+.search-box:focus-within {
+    border-color: #00d2ff; /* لون نيون عند التركيز */
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.2); /* توهج خفيف */
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff; /* لون الكتابة أبيض صريح */
+    padding: 12px 10px;
+    flex: 1;
+    font-size: 16px;
+}
+
+/* تعديل لون الـ Placeholder عشان يكون مقروء */
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-box button {
+    background: #00d2ff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #0f2027; /* أيقونة سودة عشان تبان فوق الزرار المنور */
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.search-box button:hover {
+    transform: scale(1.05);
+    background: #ffffff;
+}
+
+
+
+.error-message {
+    color: #ff4d4d; /* لون أحمر هادئ */
+    font-size: 20px;
+    text-align: left;
+    margin-top: -20px; /* لتقريبها من مربع البحث */
+    margin-bottom: 20px;
+    margin-left: 10px;
+    display: none; /* مخفية افتراضياً */
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 5. عرض الطقس */
+.weather-icon img {
+  width: 140px;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+  animation: float 4s ease-in-out infinite;
+}
+
+.temp {
+  font-size: 80px;
+  font-weight: 800;
+  margin: 10px 0;
+  color: #00d2ff; /* نفس لون الـ accent */
+  text-shadow: 0 0 30px rgb(52 155 177 / 30%);
+  letter-spacing: -2px;
+}
+
+.city {
+  font-size: 28px;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.description {
+  color: var(--text-secondary);
+  text-transform: capitalize;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* 6. تفاصيل إضافية (الرطوبة والرياح) */
+.details {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.col i {
+  font-size: 22px;
+  color: var(--accent-color);
+}
+
+.col p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.col span {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: block;
+}
+
+/* 7. Animations - الحركات */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* 8. Responsive - التجاوب */
+@media (max-width: 480px) {
+  .weather-card {
+    padding: 30px 20px;
+  }
+  .temp {
+    font-size: 60px;
+  }
+  .city {
+    font-size: 24px;
+  }
+}

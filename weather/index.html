@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather app</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="weather-card">
+        <div class="language-switch">
+          <button class="lang-btn en active">EN</button>
+          <button class="lang-btn ar">AR</button>
+        </div>
+
+        <div class="search-box">
+          <input
+            autocomplete="off"
+            type="text"
+            placeholder="Country Name"
+            id="city-input"
+          />
+          <button id="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <p class="error-message" id="error-msg">Invalid city name, please try again.</p>
+
+        <div class="weather-info">
+          <div class="weather-icon">
+            <img
+              src="https://openweathermap.org/img/wn/10n@4x.png"
+              alt="weather icon"
+              id="main-icon"
+            />
+          </div>
+          <h1 class="temp"><span id="temp-val">---</span>°C</h1>
+          <h2 class="city">---</h2>
+          <p class="description">---</p>
+        </div>
+
+        <div class="details">
+          <div class="col">
+            <div>
+              <p class="wind">--- km / h</p>
+              <p class="wind-property">wind speed</p>
+            </div>
+            <i class="fa-solid fa-wind"></i>
+          </div>
+
+          <div class="col">
+            <div>
+              <p class="humidity">--- %</p>
+              <p class="humidity-property">humidity</p>
+            </div>
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

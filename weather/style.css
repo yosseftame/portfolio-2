@@ -1,74 +1,55 @@
-/* 1. المتغيرات - Variables لسهولة التعديل */
 :root {
-  /* ألوان الـ Dark Mode الاحترافي */
   --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-  --card-bg: rgba(255, 255, 255, 0.07); /* تأثير زجاجي شفاف جداً */
+  --card-bg: rgba(255, 255, 255, 0.07);
   --text-primary: #ffffff;
   --text-secondary: #b0bec5;
-  --accent-color: #00d2ff; /* لون النيون للأيقونات */
+  --accent-color: #00d2ff;
   --input-bg: rgba(255, 255, 255, 0.1);
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
-  /*  */
-  --bg-gradient-dark-mode: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  /* --bg-gradient-dark-mode: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   --text-primary-dark-mode: #333;
-  --card-bg-dark-mode: rgba(255, 255, 255, 0.8); /*   =  */
+  --card-bg-dark-mode: rgba(255, 255, 255, 0.8); */
 }
 
-
-/* تنسيق حاوية أزرار اللغة */
 .language-switch {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    margin-bottom: 25px;
-    background: rgba(255, 255, 255, 0.05);
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 12px;
-    padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* تنسيق الأزرار نفسها */
 .lang-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: var(--transition);
-    min-width: 50px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: var(--transition);
+  min-width: 50px;
 }
 
-/* حالة الزر النشط (المختار) */
 .lang-btn.active {
-    background: var(--accent-color);
-    color: #0f2027;
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+  background: var(--accent-color);
+  color: #0f2027;
+  box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
 }
 
-/* تأثير عند تمرير الماوس على الزر غير النشط */
 .lang-btn:not(.active):hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-
-
-
-
-
-
-
-
-
-
-/* 2. الإعدادات العامة */
 * {
   margin: 0;
   padding: 0;
@@ -84,17 +65,14 @@ body {
   justify-content: center;
   align-items: center;
   color: var(--text-primary);
-  overflow: hidden; /* لمنع السكرول لو مش محتاجينه */
+  overflow: hidden;
 }
 
-/* dark mode */
-
-.dark-mode {
+/* .dark-mode {
   background: var(--bg-gradient-dark-mode);
   color: var(--text-primary-dark-mode);
-}
+} */
 
-/* 3. الحاوية والكارت */
 .container {
   width: 100%;
   padding: 20px;
@@ -116,84 +94,80 @@ body {
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
   transition: var(--transition);
 }
-.weather-card-dark-mod {
+
+/* .weather-card-dark-mod {
   background: var(--card-bg-dark-mode);
-}
+} */
 
 .weather-card:hover {
   transform: translateY(-5px);
   border-color: rgba(255, 255, 255, 0.2);
 }
-/* صندوق البحث المعدل */
+
 .search-box {
-    display: flex;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.2); /* خلفية أغمق عشان تبرز من الكارت */
-    border-radius: 15px;
-    padding: 5px 12px;
-    margin-bottom: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* إطار خفيف جداً للتحديد */
-    transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 5px 12px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-/* لما المستخدم يضغط على الـ input للـ كتابة */
 .search-box:focus-within {
-    border-color: #00d2ff; /* لون نيون عند التركيز */
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 10px rgba(0, 210, 255, 0.2); /* توهج خفيف */
+  border-color: #00d2ff;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
 }
 
 .search-box input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #ffffff; /* لون الكتابة أبيض صريح */
-    padding: 12px 10px;
-    flex: 1;
-    font-size: 16px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 12px 10px;
+  flex: 1;
+  font-size: 16px;
 }
 
-/* تعديل لون الـ Placeholder عشان يكون مقروء */
 .search-box input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .search-box button {
-    background: #00d2ff;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    cursor: pointer;
-    color: #0f2027; /* أيقونة سودة عشان تبان فوق الزرار المنور */
-    font-size: 18px;
-    transition: all 0.3s ease;
+  background: #00d2ff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #0f2027;
+  font-size: 18px;
+  transition: all 0.3s ease;
 }
 
 .search-box button:hover {
-    transform: scale(1.05);
-    background: #ffffff;
+  transform: scale(1.05);
+  background: #ffffff;
 }
 
-
-
 .error-message {
-    color: #ff4d4d; /* لون أحمر هادئ */
-    font-size: 20px;
-    text-align: left;
-    margin-top: -20px; /* لتقريبها من مربع البحث */
-    margin-bottom: 20px;
-    margin-left: 10px;
-    display: none; /* مخفية افتراضياً */
-    animation: fadeIn 0.3s ease;
+  color: #ff4d4d;
+  font-size: 20px;
+  text-align: left;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  display: none;
+  animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* 5. عرض الطقس */
 .weather-icon img {
   width: 140px;
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
@@ -204,7 +178,7 @@ body {
   font-size: 80px;
   font-weight: 800;
   margin: 10px 0;
-  color: #00d2ff; /* نفس لون الـ accent */
+  color: #00d2ff;
   text-shadow: 0 0 30px rgb(52 155 177 / 30%);
   letter-spacing: -2px;
 }
@@ -222,7 +196,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* 6. تفاصيل إضافية (الرطوبة والرياح) */
 .details {
   display: flex;
   justify-content: space-between;
@@ -252,7 +225,6 @@ body {
   display: block;
 }
 
-/* 7. Animations - الحركات */
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -265,8 +237,7 @@ body {
 }
 
 @keyframes float {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
   50% {
@@ -274,7 +245,6 @@ body {
   }
 }
 
-/* 8. Responsive - التجاوب */
 @media (max-width: 480px) {
   .weather-card {
     padding: 30px 20px;

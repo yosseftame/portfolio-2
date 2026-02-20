@@ -29,7 +29,6 @@ body {
   justify-content: center;
   align-items: center;
   color: var(--text-primary);
-  overflow: hidden;
 }
 
 /* .dark-mode {
@@ -46,6 +45,7 @@ body {
 }
 
 .weather-card {
+  
   background: var(--card-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);

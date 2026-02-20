@@ -23,8 +23,8 @@ function moveSlider(direction) {
 window.addEventListener("resize", () => {
   if (window.innerWidth > 950 && sideMenu.classList.contains("active"))
     toggleMenu();
-  currentIndex = 0;
-  track.style.transform = "translateX(0)";
+  // currentIndex = 0;
+  // track.style.transform = "translateX(0)";
 });
 //
 const contactForm = document.getElementById("contact-form");

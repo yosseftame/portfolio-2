@@ -20,7 +20,6 @@ const errorMessage=document.querySelector(".error-message")
 en.addEventListener("click", () => {
   errorMessage.textContent =
     "Invalid city name, please try again.";
-
   errorMessage.setAttribute("dir", "ltr");
   divInput.setAttribute("dir", "ltr");
   windDetails.setAttribute("dir", "ltr");
@@ -49,110 +48,50 @@ let getData = async function (countryName, lang) {
   const resp = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${countryName}&appid=e96dfdaecc3b0640eb24ea6b891d1e6c&units=metric&lang=${lang}`,
   );
-
   const data = await resp.json();
   return data;
 };
 
-searchBtn.addEventListener("click", () => {
-  console.log(input.value);
-  if (input.value !== "") {
-    getData(input.value, document.documentElement.lang)
-      .then((r) => {
-        errorMessage.style.display = "none";
-
-        cityName.textContent = r.name;
-        tempValue.textContent = `${r.main.temp}`;
-        description.textContent =
-          r.weather[0].description;
-        humidityDetails.textContent =
-          `${r.main.humidity} %`;
-        if (document.documentElement.lang === "en") {
-          windDetails.textContent =
-            `${r.wind.speed} km / h`;
-        } else {
-          windDetails.textContent = `${r.wind.speed} كم/س`;
-        }
-        weatherImg.src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@4x.png`;
-        console.log(r);
-      })
-      .catch(() => {
-        errorMessage.style.display = "block";
-
-        cityName.textContent = "---";
-        tempValue.textContent = "---";
-        description.textContent = "---";
-        windDetails.textContent = "---";
-        humidityDetails.textContent = "---";
-      });
+function resetDetailsAndShowError() {
+  errorMessage.style.display = "block";
+  cityName.textContent = "---";
+  tempValue.textContent = "---";
+  description.textContent = "---";
+  windDetails.textContent = "---";
+  humidityDetails.textContent = "---";
+}
+function showDetailsِAndHideError(data) {
+  errorMessage.style.display = "none";
+  cityName.textContent = data.name;
+  tempValue.textContent = `${data.main.temp}`;
+  description.textContent = data.weather[0].description;
+  humidityDetails.textContent = `${data.main.humidity} %`;
+  if (document.documentElement.lang === "en") {
+    windDetails.textContent = `${data.wind.speed} km / h`;
   } else {
-    errorMessage.style.display = "block";
-
-    cityName.textContent = "---";
-    tempValue.textContent = "---";
-    description.textContent = "---";
-    windDetails.textContent = "---";
-    humidityDetails.textContent = "---";
+    windDetails.textContent = `${data.wind.speed} كم/س`;
   }
-
+  weatherImg.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
   input.focus();
-});
-input.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
+}
+function handleSearch(){
     if (input.value !== "") {
       getData(input.value, document.documentElement.lang)
-        .then((r) => {
-          errorMessage.style.display = "none";
-          cityName.textContent = r.name;
-          tempValue.textContent = `${r.main.temp}`;
-          description.textContent =
-            r.weather[0].description;
-          humidityDetails.textContent =
-            `${r.main.humidity} %`;
-          if (document.documentElement.lang === "en") {
-            windDetails.textContent =
-              `${r.wind.speed} km / h`;
-          } else {
-            windDetails.textContent =
-              `${r.wind.speed} كم/س`;
-          }
-          weatherImg.src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@4x.png`;
-          input.focus();
+        .then((data) => {
+          showDetailsِAndHideError(data);
         })
         .catch(() => {
-          errorMessage.style.display = "block";
-
-          cityName.textContent = "---";
-          tempValue.textContent = "---";
-          description.textContent = "---";
-          windDetails.textContent = "---";
-          humidityDetails.textContent = "---";
+          resetDetailsAndShowError();
         });
     } else {
-      errorMessage.style.display = "block";
-
-      cityName.textContent = "---";
-      tempValue.textContent = "---";
-      description.textContent = "---";
-      windDetails.textContent = "---";
-      humidityDetails.textContent = "---";
+      resetDetailsAndShowError();
     }
-  } else {
-    return;
-  }
+
+    input.focus();
+}
+
+searchBtn.addEventListener("click",handleSearch)
+
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") handleSearch()
 });
-
-// ! dark mode
-// btn.onclick= ()=>{
-
-//     document.body.classList.add("dark-mode")
-//     document.querySelector(".weather-card").classList.add("weather-card-dark-mod");
-//     document.documentElement.lang="en"
-//     document.documentElement.dir="ltr"
-//     input.setAttribute("placeholder", "Search for your city");
-// }
-
-// input.addEventListener("input",(e)=>{
-//     input.value=(e.target.value);
-
-// })
